@@ -1,15 +1,32 @@
 <div *ngIf="dataLoaded==false" class="spinner-border text-primary" role="status">
   <span class="visually-hidden">Loading...</span>
 </div>
-<table *ngIf="dataLoaded==true" class="table">
-  <thead>
-    <tr>
-      <td>Id</td>
-      <td>Marka Adı</td>
-    </tr>
-  </thead>
-  <tr *ngFor="let brand of brands">
-    <td>{{ brand.brandId }}</td>
-    <td>{{ brand.brandName }}</td>
-  </tr>
-</table>
+<div class="accordion m-3" id="accordionExample">
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingOne">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+        Marka
+      </button>
+    </h2>
+    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        <div class="m-1">
+          <input
+            type="text"
+            [(ngModel)]="filterText"
+            class="form-control"
+            id="filterText"
+            placeholder="Arama ifadesi giriniz"
+          />
+        </div>
+        <div *ngIf="filterText" class="alert alert-success m-3">
+          {{ filterText }} aradınız.
+        </div>
+        <ul class="list-group mt-4 " >
+          <li (click) = "setAllCurrentBrand()" routerLink="/cars" class="list-group-item list-group-item-dark" >Tüm Arabalar</li>
+          <li (click)="setCurrentBrand(brand)" routerLink="/cars/brand/{{brand.brandId}}" *ngFor="let brand of brands | filterPipe: filterText" [class]="getCurrentBrand(brand)">{{brand.brandName}}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

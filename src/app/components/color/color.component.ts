@@ -4,13 +4,15 @@ import { ColorService } from 'src/app/services/color.service';
 
 @Component({
   selector: 'app-color',
-  templateUrl: './color.component.html',
+  templateUrl:'./color.component.html',
   styleUrls: ['./color.component.css']
 })
 export class ColorComponent implements OnInit {
 
   colors:Color[] = []
   dataLoaded = false
+  currentColor:Color
+  filterText:string=""
 
   constructor(private colorService:ColorService) { }
 
@@ -23,6 +25,25 @@ export class ColorComponent implements OnInit {
       this.colors = response.data
       this.dataLoaded = true
     })
+  }
+
+  setCurrentColor(color:Color){
+    this.currentColor = color
+  }
+
+  getCurrentColor(color:Color){
+    if (color == this.currentColor) {
+      return "list-group-item active"
+    }
+    else{
+      return "list-group-item"
+    }
+  }
+
+  setAllCurrentColor(){
+    if(this.currentColor){
+      this.currentColor = {colorId:0,colorName:""}
+    }
   }
 
 }

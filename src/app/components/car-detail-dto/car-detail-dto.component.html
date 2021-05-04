@@ -1,0 +1,39 @@
+<div
+  *ngFor="let carDetailDto of carDetailsDto"
+  class="card m-3"
+  style="width: 40%; height: 50%;"
+>
+  <img
+    src="{{ defaultPath }}{{ carDetailDto.imagePath }}"
+    class="card-img-top"
+    alt="..."
+  />
+  <div class="card-body">
+    <h5 class="card-title">{{ carDetailDto.carName }}</h5>
+    <table class="table">
+      <thead>
+        <tr>
+          <th> Marka </th>
+          <th> Renk </th>
+          <th> Fiyat</th>
+          <th> Tanıtım </th>
+          <th> Yıl </th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{ carDetailDto.brandName }}</td>
+          <td>{{ carDetailDto.colorName }}</td>
+          <td>{{carDetailDto.dailyPrice}}</td>
+          <td>{{carDetailDto.descriptions}}</td>
+          <td>{{carDetailDto.modelYear}}</td>
+          <td><button routerLink="/cars/car-detail-dto/{{carDetailDto.carId}}" type="button" class="btn btn-success">Kirala</button></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p class="card-text"></p>
+  </div>
+</div>
+

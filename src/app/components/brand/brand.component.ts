@@ -10,6 +10,8 @@ import { BrandService } from 'src/app/services/brand.service';
 export class BrandComponent implements OnInit {
   brands:Brand[] = []
   dataLoaded  = false;
+  currentBrand:Brand  // active için gerekli
+  filterText:string = '';
 
   constructor(private brandService:BrandService) { }
 
@@ -22,6 +24,24 @@ export class BrandComponent implements OnInit {
       this.brands = response.data
       this.dataLoaded = true
     })
+  }
+  // htmlde click imizi componente set ettik
+  setCurrentBrand(brand:Brand){
+    this.currentBrand = brand
+  }
+  // seçili olan ise mavi yap olmayanları normal bırak işlemini yaptık.
+  getCurrentBrand(brand:Brand){
+    if (brand == this.currentBrand) {
+      return "list-group-item active"
+    }
+    else{
+      return "list-group-item"
+    }
+  }
+  setAllCurrentBrand(){
+    if(this.currentBrand){
+      this.currentBrand = {brandId:0 , brandName:""}
+    }
   }
 
 }
