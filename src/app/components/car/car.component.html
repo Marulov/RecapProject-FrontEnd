@@ -6,7 +6,45 @@
   <span class="visually-hidden">Loading...</span>
 </div>
 
-<table *ngIf="dataLoaded == true" class="table">
+<div class="row m-2">
+
+  <div class="col-md-4" >
+    <label for="colorFilter">Marka seçiniz</label>
+    <select id="brandFilter" [(ngModel)]="brandFilterId" class="form-select" aria-label="Default select example">
+      <option *ngFor="let brand of brands" [value]="brand.brandId"
+      [selected]="getSelectedBrand(brand.brandId)">{{brand.brandName}}</option>
+    </select>
+  </div>
+
+  <div class="col-md-4" >
+    <label for="colorFilter">Renk seçiniz</label>
+    <select id="colorFilter" [(ngModel)]="colorFilterId" class="form-select" aria-label="Default select example">
+      <option *ngFor="let color of colors" [value]="color.colorId"
+      [selected]="getSelectedColor(color.colorId)">{{color.colorName}}</option>
+    </select>
+  </div>
+
+  <div  class="m-4 col-3">
+    <button class="btn btn-primary me-md-2 btn-small" routerLink="cars/brand/{{brandFilterId}}/color/{{colorFilterId}}" type="button">Filter</button>
+    <button class="btn btn-danger me-md-2 btn-small" routerLink="" type="button">Clear</button>
+  </div>
+
+</div>
+
+
+<div class="m-3">
+  <input
+    type="text"
+    [(ngModel)]="filterText"
+    class="form-control"
+    id="filterText"
+    placeholder="Arama ifadesi giriniz"
+  />
+</div>
+<div *ngIf="filterText" class="alert alert-success m-3">
+  {{ filterText }} aradınız.
+</div>
+<table *ngIf="dataLoaded == true" class="table m-3">
   <thead>
     <tr>
       <th>Araba İsmi</th>
@@ -16,7 +54,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let car of cars">
+    <tr *ngFor="let car of cars | carFilterPipe: filterText">
       <td>{{ car.carName }}</td>
       <td>{{ car.modelYear }}</td>
       <td>{{ car.description }}</td>

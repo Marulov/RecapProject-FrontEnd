@@ -15,6 +15,7 @@ import { NaviComponent } from './components/navi/navi.component';
 import { CarDetailDtoComponent } from './components/car-detail-dto/car-detail-dto.component';
 import { FilterPipePipe } from './pipes/filter-pipe.pipe';
 import { ColorFilterPipePipe } from './pipes/color-filter-pipe.pipe';
+import { CarFilterPipePipe } from './pipes/car-filter-pipe.pipe';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import { ColorFilterPipePipe } from './pipes/color-filter-pipe.pipe';
     CarDetailDtoComponent,
     FilterPipePipe,
     ColorFilterPipePipe,
+    CarFilterPipePipe,
   ],
   imports: [
     BrowserModule,
